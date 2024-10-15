@@ -11,7 +11,8 @@ import Contact from './pages/Contact';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/dashboard';
-import UserProfile from './pages/userprofile'; // Add this import
+import UserProfile from './pages/userprofile';
+import AddHospital from './pages/addHospital'; // Add this import
 
 function App() {
   return (
@@ -35,11 +36,19 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-                <Route // Add this new route
+                <Route
                   path="/profile"
                   element={
                     <ProtectedRoute>
                       <UserProfile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route // Add this new route
+                  path="/add-hospital"
+                  element={
+                    <ProtectedRoute>
+                      <AddHospital />
                     </ProtectedRoute>
                   }
                 />
