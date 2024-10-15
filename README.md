@@ -32,5 +32,48 @@ Welcome to the **Pandemic Healthcare Management** web app, an all-in-one platfor
 
 1. **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/SWATHYA-SETU/DASHBOARD-WEB-APP.git
+   #!/bin/bash
+
+# Clone the repository (uncomment if needed)
+# git clone https://github.com/SWATHYA-SETU/DASHBOARD-WEB-APP.git
+# cd DASHBOARD-WEB-APP
+
+# Fetch the latest changes
+git fetch origin
+
+# Switch to the working branch
+git checkout Updated_hospital_admin
+
+# Pull the latest changes
+git pull origin Updated_hospital_admin
+
+# Create a new branch (replace 'your-name-feature' with desired branch name)
+git checkout -b your-name-feature
+
+# Make your changes here...
+
+# Stage all changes
+git add .
+
+# Commit changes (replace commit message as needed)
+git commit -m "Update hospital admin code"
+
+# Push the new branch to the remote repository
+git push -u origin your-name-feature
+
+# Switch back to the main branch
+git checkout Updated_hospital_admin
+
+# Pull any new changes
+git pull origin Updated_hospital_admin
+
+# Switch back to your feature branch
+git checkout your-name-feature
+
+# Merge changes from the main branch
+git merge Updated_hospital_admin
+
+# Push the updated feature branch
+git push origin your-name-feature
+
+echo "All done! Don't forget to create a pull request on GitHub!"
