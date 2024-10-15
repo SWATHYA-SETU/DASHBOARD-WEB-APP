@@ -2,60 +2,29 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { useAuth } from '../autocontext'; // Adjust the import path as needed
-import HospitalDetails from '../components/HospitalDetails'; 
-import HospitalStaff from '../components/HospitalStaff'; 
+import HospitalDetails from '../components/HospitalDetails';
+import HospitalStaff from '../components/HospitalStaff';
+import MedicalShopDetails from '../components/MedicalShopDetails';
+import CreateMedicalShop from '../components/CreateMedicalShop';
+import MedicalShopInventory from '../components/MedicalShopInventory';
 import { UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
 
 const GET_USER_DATA = gql`
   query GetUserData($firebase_uid: String!) {
     hospital_admins(where: {firebase_uid: {_eq: $firebase_uid}}) {
-      id
-      username
-      email
-      full_name
-      address
-      contact_number
-      hospital_id
+      id username email full_name address contact_number hospital_id
     }
     medical_shop_admins(where: {firebase_uid: {_eq: $firebase_uid}}) {
-      id
-      username
-      email
-      full_name
-      address
-      contact_number
-      medical_shop_id
+      id username email full_name address contact_number medical_shop_id
     }
     citizens(where: {firebase_uid: {_eq: $firebase_uid}}) {
-      id
-      username
-      email
-      full_name
-      date_of_birth
-      address
-      phone_number
-      emergency_contact
-      medical_history
-      vaccination_record
+      id username email full_name date_of_birth address phone_number emergency_contact medical_history vaccination_record
     }
     volunteers(where: {firebase_uid: {_eq: $firebase_uid}}) {
-      id
-      username
-      email
-      full_name
-      date_of_birth
-      address
-      phone_number
-      skills
-      availability
+      id username email full_name date_of_birth address phone_number skills availability
     }
     admin_users(where: {firebase_uid: {_eq: $firebase_uid}}) {
-      id
-      username
-      email
-      full_name
-      role
-      address
+      id username email full_name role address
     }
   }
 `;
@@ -92,25 +61,20 @@ const Dashboard = () => {
 
   const getUserRoleDisplay = (role) => {
     switch (role) {
-      case 'hospital_admin':
-        return 'Hospital Administrator';
-      case 'medical_shop_admin':
-        return 'Medical Shop Administrator';
-      case 'citizen':
-        return 'Citizen';
-      case 'volunteer':
-        return 'Volunteer';
-      case 'admin_user':
-        return 'System Administrator';
-      default:
-        return role.charAt(0).toUpperCase() + role.slice(1);
+      case 'hospital_admin': return 'Hospital Administrator';
+      case 'medical_shop_admin': return 'Medical Shop Administrator';
+      case 'citizen': return 'Citizen';
+      case 'volunteer': return 'Volunteer';
+      case 'admin_user': return 'System Administrator';
+      default: return role.charAt(0).toUpperCase() + role.slice(1);
     }
   };
+  
 
   const renderUserDetails = () => {
     if (!userData) return <p>No user data available.</p>;
 
-    const excludeFields = ['id', 'firebase_uid', 'hospital_id'];
+    const excludeFields = ['id', 'firebase_uid', 'hospital_id', 'medical_shop_id'];
     const fieldIcons = {
       username: UserIcon,
       email: EnvelopeIcon,
@@ -160,6 +124,53 @@ const Dashboard = () => {
     );
   };
 
+  const renderDetailsComponent = () => {
+    if (userRole === 'hospital_admin' && userData.hospital_id) {
+      return (
+        <>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-4 bg-blue-50">
+              <h2 className="text-xl font-semibold text-blue-800">Hospital Details</h2>
+            </div>
+            <div className="p-4">
+              <HospitalDetails hospitalId={userData.hospital_id} />
+            </div>
+          </div>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden mt-6">
+            <div className="p-4 bg-blue-50">
+              <h2 className="text-xl font-semibold text-blue-800">Hospital Staff</h2>
+            </div>
+            <div className="p-4">
+              <HospitalStaff hospitalId={userData.hospital_id} />
+            </div>
+          </div>
+        </>
+      );
+    } else if (userRole === 'medical_shop_admin' && userData.medical_shop_id) {
+      return (
+        <>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+            <div className="p-4 bg-blue-50">
+              <h2 className="text-xl font-semibold text-blue-800">Medical Shop Details</h2>
+            </div>
+            <div className="p-4">
+              <MedicalShopDetails medicalShopId={userData.medical_shop_id} />
+            </div>
+          </div>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-4 bg-blue-50">
+              <h2 className="text-xl font-semibold text-blue-800">Inventory and Sales</h2>
+            </div>
+            <div className="p-4">
+              <MedicalShopInventory medical_shop_id={userData.medical_shop_id} />
+            </div>
+          </div>
+        </>
+      );
+    }
+    return null;
+  };
+
   const renderAdditionalInfo = () => {
     if (userRole === 'hospital_admin' && userData.hospital_id === null) {
       return (
@@ -176,12 +187,12 @@ const Dashboard = () => {
       );
     } else if (userRole === 'medical_shop_admin' && userData.medical_shop_id === null) {
       return (
-        <div className="mt-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
-          <p className="font-bold">Notice:</p>
-          <p>You have not created any medical shop yet. Please create a medical shop to manage.</p>
-          <Link to="/create-medical-shop" className="mt-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Create Medical Shop
-          </Link>
+        <div className="mt-4">
+          <div className="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 mb-4">
+            <p className="font-bold">Notice:</p>
+            <p>You have not created any medical shop yet. Please create a medical shop to manage.</p>
+          </div>
+          <CreateMedicalShop adminId={userData.id} />
         </div>
       );
     }
@@ -195,26 +206,7 @@ const Dashboard = () => {
       </h1>
       <div className="flex flex-col md:flex-row justify-center items-start space-y-6 md:space-y-0 md:space-x-6 mb-10">
         <div className="w-full md:w-1/2 order-2 md:order-1">
-          {userRole === 'hospital_admin' && userData.hospital_id && (
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-              <div className="p-4 bg-blue-50">
-                <h2 className="text-xl font-semibold text-blue-800">Hospital Details</h2>
-              </div>
-              <div className="p-4">
-                <HospitalDetails hospitalId={userData.hospital_id} />
-              </div>
-            </div>
-          )}
-          {userRole === 'hospital_admin' && userData.hospital_id && (
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden mt-6">
-              <div className="p-4 bg-blue-50">
-                <h2 className="text-xl font-semibold text-blue-800">Hospital Staff</h2>
-              </div>
-              <div className="p-4">
-                <HospitalStaff hospitalId={userData.hospital_id} />
-              </div>
-            </div>
-          )}
+          {renderDetailsComponent()}
         </div>
         {userData && (
           <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-2/5 order-1 md:order-2">
@@ -235,10 +227,6 @@ const Dashboard = () => {
             </div>
           </div>
         )}
-      </div>
-      <div className="bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">Dashboard Content</h2>
-        <p>Add your main dashboard content, statistics, or other relevant information here.</p>
       </div>
     </div>
   );
