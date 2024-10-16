@@ -1,18 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/client';
-import client from './apollo'; // Make sure this path is correct
-import { AuthProvider } from './autocontext';
-import { ProtectedRoute } from './protectedroute';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Dashboard from './pages/dashboard';
-import UserProfile from './pages/userprofile';
-import AddHospital from './pages/addHospital'; // Add this import
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
+import client from "./apollo"; // Make sure this path is correct
+import { AuthProvider } from "./autocontext";
+import { ProtectedRoute } from "./protectedroute";
+import Navbar from "./components/Navbar";
+import Marquee from "./components/marquee";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/dashboard";
+import UserProfile from "./pages/userprofile";
+import AddHospital from "./pages/addHospital";
+import "flowbite/dist/flowbite.css";
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       <AuthProvider>
         <Router>
           <div className="App flex flex-col min-h-screen">
+            <Marquee />
             <Navbar />
             <main className="flex-grow container mx-auto px-4 py-8">
               <Routes>

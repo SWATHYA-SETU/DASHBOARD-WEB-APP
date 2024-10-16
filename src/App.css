@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.gradientBg {
+  background: linear-gradient(135deg, #2374e1, #4fb3f2, #ebf4ff);
+}
+
+html,
+body {
+  height: 100%;
+  overflow-y: auto; /* Allow vertical scrolling */
+}
