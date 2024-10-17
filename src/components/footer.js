@@ -83,11 +83,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <FaPhone className="mr-2" /> {/* Phone icon */}
-                <span>+1 (123) 456-7890</span>
+                <span>+91-7668291228</span>
               </div>
               <div className="flex items-center">
                 <FaMapMarkerAlt className="mr-2" /> {/* Location icon */}
-                <span>123 Health Street, Wellness City, 12345</span>
+                <span>INDIA</span>
               </div>
             </div>
             {/* Add vertical gap */}

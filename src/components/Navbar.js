@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../autocontext'; // Adjust the import path as needed
 import { auth } from '../components/firebase'; // Adjust the import path as needed
 import { signOut } from 'firebase/auth';
+import logo from '../assets/logo2.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,9 +56,10 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
         <Link to="/" className="flex items-center space-x-3">
-            <img src="/Register_page_1.png" alt="Swasthya Setu Logo" className="h-10 w-10 rounded-full" />
+            <img src={logo} alt="Swasthya Setu Logo" className="h-14 w-14 rounded-full" />
             <span className="text-white text-2xl font-bold">Swasthya Setu</span>
           </Link>
+
 
 
           {/* Hamburger menu for mobile */}
