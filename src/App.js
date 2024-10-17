@@ -6,6 +6,7 @@ import { AuthProvider } from "./autocontext";
 import { ProtectedRoute } from "./protectedroute";
 import Navbar from "./components/Navbar";
 import Marquee from "./components/marquee";
+import Footer from "./components/footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -57,9 +58,7 @@ function App() {
                 />
               </Routes>
             </main>
-            <footer className="bg-primary text-white text-center py-4">
-              © 2024 Swasthya Setu. All rights reserved.
-            </footer>
+            <Footer />
           </div>
         </Router>
       </AuthProvider>
