@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { useAuth } from '../autocontext'; // Adjust the import path as needed
+import { useAuth } from '../autocontext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PencilIcon, XMarkIcon, CheckIcon, EyeIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, XMarkIcon, CheckIcon, EyeIcon, PlusIcon, ClockIcon, BuildingOffice2Icon, UserIcon, CalendarIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+
 
 const GET_CITIZEN_ID = gql`
   query GetCitizenId($email: String!) {
@@ -167,54 +168,98 @@ const CardForm = () => {
   ];
 
   return (
-    <div className="flex justify-center items-start min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-6xl flex space-x-4">
+    <div className="flex justify-center items-start min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-8">
+      <div className="w-full max-w-7xl flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
         {/* Previous Submissions */}
-        <div className="w-1/2 bg-white rounded-xl shadow-lg p-6 overflow-hidden">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Previous Submissions</h2>
-          <div className="overflow-y-auto max-h-[calc(100vh-200px)]">
-            {healthRecordsData?.health_records.map((record) => (
-              <motion.div
-                key={record.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-gray-50 p-4 rounded-lg mb-4 shadow"
-              >
-                <div className="flex justify-between items-start">
-                  <h3 className="font-semibold text-blue-600">{record.record_type}</h3>
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEdit(record)}
-                      className="text-blue-500 hover:text-blue-600 transition duration-300"
-                    >
-                      <PencilIcon className="h-5 w-5" />
-                    </button>
-                    <button
-                      onClick={() => setSelectedImage(record.file_path)}
-                      className="text-green-500 hover:text-green-600 transition duration-300"
-                    >
-                      <EyeIcon className="h-5 w-5" />
-                    </button>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full md:w-1/2 bg-white rounded-2xl shadow-xl p-6 overflow-hidden"
+        >
+          <h2 className="text-3xl font-bold text-blue-600 mb-6 flex items-center">
+            <ClockIcon className="h-8 w-8 mr-2 text-blue-500" />
+            Previous Records
+          </h2>
+          <div className="overflow-y-auto max-h-[calc(100vh-250px)] pr-4">
+            <AnimatePresence>
+              {healthRecordsData?.health_records.map((record, index) => (
+                <motion.div
+                  key={record.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className="bg-gray-50 p-6 rounded-xl mb-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-semibold text-blue-600 text-lg">{record.record_type}</h3>
+                    <div className="flex space-x-2">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => handleEdit(record)}
+                        className="text-blue-500 hover:text-blue-600 transition duration-300"
+                      >
+                        <PencilIcon className="h-5 w-5" />
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => setSelectedImage(record.file_path)}
+                        className="text-green-500 hover:text-green-600 transition duration-300"
+                      >
+                        <EyeIcon className="h-5 w-5" />
+                      </motion.button>
+                    </div>
                   </div>
-                </div>
-                <p className="text-sm text-gray-600"><strong>Hospital/Lab:</strong> {record.hospital_or_lab_name}</p>
-                <p className="text-sm text-gray-600"><strong>Doctor:</strong> {record.doctor_name}</p>
-                <p className="text-sm text-gray-600"><strong>Date:</strong> {new Date(record.visit_date).toLocaleDateString()}</p>
-                <p className="text-sm text-gray-600"><strong>Description:</strong> {record.record_description}</p>
-                <p className="text-sm text-gray-600"><strong>Notes:</strong> {record.additional_notes}</p>
-              </motion.div>
-            ))}
+                  <div className="mt-2 space-y-1">
+                    <p className="text-sm text-gray-600 flex items-center">
+                    <BuildingOffice2Icon className="h-4 w-4 mr-2 text-blue-500" />
+                      <strong>Hospital/Lab:</strong> {record.hospital_or_lab_name}
+                    </p>
+                    <p className="text-sm text-gray-600 flex items-center">
+                    <UserIcon className="h-4 w-4 mr-2 text-blue-500" />
+                      <strong>Doctor:</strong> {record.doctor_name}
+                    </p>
+                    <p className="text-sm text-gray-600 flex items-center">
+                      <CalendarIcon className="h-4 w-4 mr-2 text-blue-500" />
+                      <strong>Date:</strong> {new Date(record.visit_date).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: 'auto' }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-2 overflow-hidden"
+                  >
+                    <p className="text-sm text-gray-600"><strong>Description:</strong> {record.record_description}</p>
+                    <p className="text-sm text-gray-600"><strong>Notes:</strong> {record.additional_notes}</p>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
 
         {/* Form */}
-        <div className="w-1/2 bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full md:w-1/2 bg-white rounded-2xl shadow-xl p-6"
+        >
+          <h2 className="text-3xl font-bold text-blue-600 mb-6 flex items-center">
+            {isEditing ? <PencilIcon className="h-8 w-8 mr-2 text-blue-500" /> : <PlusIcon className="h-8 w-8 mr-2 text-blue-500" />}
             {isEditing ? 'Edit Health Record' : 'Add Health Record'}
           </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {formFields.map((field) => (
-              <motion.div key={field.name} whileHover={{ scale: 1.01 }} className="flex flex-col">
+              <motion.div
+                key={field.name}
+                whileHover={{ scale: 1.02 }}
+                className="flex flex-col"
+              >
                 <label htmlFor={field.name} className="text-sm font-medium text-gray-700 mb-1">{field.label}</label>
                 {field.type === 'textarea' ? (
                   <textarea
@@ -222,7 +267,7 @@ const CardForm = () => {
                     name={field.name}
                     value={formData[field.name]}
                     onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                    className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                     rows="3"
                   />
                 ) : (
@@ -232,37 +277,41 @@ const CardForm = () => {
                     name={field.name}
                     value={formData[field.name]}
                     onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                    className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                   />
                 )}
               </motion.div>
             ))}
-            <motion.div whileHover={{ scale: 1.01 }} className="flex flex-col">
+            <motion.div whileHover={{ scale: 1.02 }} className="flex flex-col">
               <label htmlFor="file" className="text-sm font-medium text-gray-700 mb-1">Upload File (Image only)</label>
               <input
                 type="file"
                 id="file"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
               />
             </motion.div>
             {previewUrl && (
-              <div className="mt-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4"
+              >
                 <h3 className="text-sm font-medium text-gray-700 mb-2">File Preview:</h3>
-                <div className="w-40 h-40 border border-gray-300 rounded-md overflow-hidden">
+                <div className="w-40 h-40 border border-gray-300 rounded-lg overflow-hidden">
                   <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
                 </div>
-              </div>
+              </motion.div>
             )}
-            <div className="flex space-x-2">
+            <div className="flex space-x-4">
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+                className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center text-lg font-semibold"
               >
-                <CheckIcon className="h-5 w-5 mr-2" />
+                <CheckIcon className="h-6 w-6 mr-2" />
                 {isEditing ? 'Save Changes' : 'Submit Record'}
               </motion.button>
               {isEditing && (
@@ -271,15 +320,15 @@ const CardForm = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={resetForm}
-                  className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-300 flex items-center justify-center"
+                  className="bg-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-400 transition duration-300 flex items-center justify-center text-lg font-semibold"
                 >
-                  <XMarkIcon className="h-5 w-5 mr-2" />
+                  <XMarkIcon className="h-6 w-6 mr-2" />
                   Cancel
                 </motion.button>
               )}
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
 
       {/* Image Preview Modal */}
@@ -290,23 +339,25 @@ const CardForm = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
           >
             <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              className="bg-white p-4 rounded-lg max-w-3xl max-h-[90vh] overflow-auto"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="bg-white p-6 rounded-xl max-w-3xl max-h-[90vh] overflow-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={selectedImage} alt="Full size preview" className="max-w-full h-auto" />
-              <button
+              <img src={selectedImage} alt="Full size preview" className="max-w-full h-auto rounded-lg shadow-lg" />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedImage(null)}
-                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 flex items-center"
+                className="mt-6 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300 flex items-center justify-center text-lg font-semibold"
               >
-                <XMarkIcon className="h-5 w-5 mr-2" />
+                <XMarkIcon className="h-6 w-6 mr-2" />
                 Close
-              </button>
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
