@@ -4,8 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Carousel } from "flowbite-react";
 import "../App.css";
-import banner from "../assets/banner_1_bgrm.png";
-import banner2 from "../assets/banner_2_bgrm.png";
+// import banner from "../assets/banner_1_bgrm.png";
+// import banner2 from "../assets/banner_2_bgrm.png";
 import aboutpic from "../assets/aboutpic1.png";
 import {
   FaTools,
@@ -20,6 +20,8 @@ import Lottie from "lottie-react";
 import icon1 from "../med.json";
 import icon2 from "../animatedicon2.json";
 import icon3 from "../animatedicon3.json";
+import b1 from "../Med2.json";
+import b2 from "../Med4.json";
 import h1 from "../assets/h1.png";
 import v1 from "../assets/v2.png";
 import c2 from "../assets/c2.png";
@@ -176,11 +178,10 @@ const Home = () => {
                   Get Started
                 </button>
               </div>
-              <div className="md:w-1/2 flex justify-center md:justify-end mt-6 md:mt-0">
-                <img
-                  src={banner}
-                  alt="Banner 1"
-                  className="max-h-[200px] md:max-h-[300px] object-contain sm:max-h-[250px] lg:max-h-[400px]"
+              <div className="md:w-1/2 flex justify-center md:justify-end mt-3 md:mt-0">
+                <Lottie
+                  animationData={b1}
+                  className="w-36 h-36 sm:w-40 sm:h-40 lg:w-96 lg:h-96 xl:w-116 xl:h-116"
                 />
               </div>
             </div>
@@ -200,11 +201,10 @@ const Home = () => {
                   Learn More
                 </button>
               </div>
-              <div className="md:w-1/2 flex justify-center md:justify-end mt-6 md:mt-0">
-                <img
-                  src={banner2}
-                  alt="Banner 2"
-                  className="max-h-[200px] md:max-h-[300px] object-contain sm:max-h-[250px] lg:max-h-[400px]"
+              <div className="md:w-1/2 flex justify-center md:justify-end mt-4 md:mt-0">
+                <Lottie
+                  animationData={b2}
+                  className="w-30 h-30 sm:w-36 sm:h-36 lg:w-96 lg:h-96"
                 />
               </div>
             </div>
