@@ -19,31 +19,30 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-[#010851] w-full lg:px-12 lg:py-5 text-white">
-      <div className="max-w-screen-2xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between">
-          <div className="md:w-1/2 space-y-4">
+    <footer className="swasthya-footer bg-[#010851] w-full lg:px-12 lg:py-5 text-white">
+      <div className="swasthya-footer-container max-w-screen-2xl mx-auto">
+        <div className="swasthya-footer-content flex flex-col md:flex-row justify-between">
+          <div className="swasthya-footer-left md:w-1/2 space-y-4">
             <a
               href="/"
-              className="text-2xl font-semibold flex items-center space-x-3 text-white"
+              className="swasthya-footer-logo text-2xl font-semibold flex items-center space-x-3 text-white"
             >
               <img src={logo} alt="logo" className="w-16 h-15 inline-block" />
               <span className="text-white">Swasthya Setu</span>
             </a>
 
-            {/* Paragraph and input with space adjustments */}
-            <p className="text-justify px-7">
+            <p className="swasthya-footer-description text-justify px-7">
               Subscribe to be updated with the important alerts,
               <br />
               and exclusive insights delivered straight to your inbox.
             </p>
-            <form onSubmit={handleSubmit} className="flex items-center">
+            <form onSubmit={handleSubmit} className="swasthya-footer-form flex items-center">
               <input
                 type="email"
                 name="email"
-                id="email"
+                id="swasthya-footer-email"
                 placeholder="Your email"
-                className="bg-[#9a7af1] py-2 px-7 rounded-md focus:outline-none w-full md:w-auto text-black"
+                className="swasthya-footer-input bg-[#9a7af1] py-2 px-7 rounded-md focus:outline-none w-full md:w-auto text-black"
                 style={{ width: "280px", marginLeft: "25px", zIndex: 10 }}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -51,7 +50,7 @@ const Footer = () => {
               <input
                 type="submit"
                 value="Submit"
-                className="bg-[#f9a826] py-2 px-4 rounded-md -ml-2 cursor-pointer bg-white text-black transition duration-300 relative overflow-hidden"
+                className="swasthya-footer-submit bg-[#f9a826] py-2 px-4 rounded-md -ml-2 cursor-pointer bg-white text-black transition duration-300 relative overflow-hidden"
                 style={{
                   marginLeft: "10px",
                   width: "90px",
@@ -63,74 +62,67 @@ const Footer = () => {
                   transition: "transform 0.2s, background-color 0.3s",
                   position: "relative",
                 }}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = "#e89d24";
-                  e.target.style.transform = "scale(1.05)";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = "#f9a826";
-                  e.target.style.transform = "scale(1)";
-                }}
               />
             </form>
           </div>
-          {/* Contact Information and Social Icons */}
-          <div className="md:w-1/2 space-y-4 mt-4 md:mt-0 flex flex-col items-end">
-            <div className="space-y-2 text-right">
+          <div className="swasthya-footer-right md:w-1/2 space-y-4 mt-4 md:mt-0 flex flex-col items-end">
+            <div className="swasthya-footer-contact space-y-2 text-right">
               <div className="flex items-center">
-                <FaEnvelope className="mr-2" /> {/* Email icon */}
+                <FaEnvelope className="mr-2" />
                 <span>info@swasthyasetu.com</span>
               </div>
               <div className="flex items-center">
-                <FaPhone className="mr-2" /> {/* Phone icon */}
+                <FaPhone className="mr-2" />
                 <span>+91-7668291228</span>
               </div>
               <div className="flex items-center">
-                <FaMapMarkerAlt className="mr-2" /> {/* Location icon */}
+                <FaMapMarkerAlt className="mr-2" />
                 <span>INDIA</span>
               </div>
             </div>
-            {/* Add vertical gap */}
-            <div className="mt-4" /> {/* Adjust this margin as needed */}
-            <div className="flex space-x-4 mt-4">
-              {/* Social Media or Icons */}
+            <div className="mt-4" />
+            <div className="swasthya-footer-social flex space-x-4 mt-4">
               <a
                 href="https://example.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="swasthya-footer-social-link"
               >
-                <img src={facebook} alt="Icon 1" className="w-10 h-10" />
+                <img src={facebook} alt="Facebook" className="w-10 h-10" />
               </a>
               <a
                 href="https://example.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="swasthya-footer-social-link"
               >
-                <img src={instagram} alt="Icon 2" className="w-10 h-10" />
+                <img src={instagram} alt="Instagram" className="w-10 h-10" />
               </a>
               <a
                 href="https://example.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="swasthya-footer-social-link"
               >
-                <img src={gmail} alt="Icon 3" className="w-10 h-10" />
+                <img src={gmail} alt="Gmail" className="w-10 h-10" />
               </a>
               <a
                 href="https://example.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="swasthya-footer-social-link"
               >
-                <img src={twitter} alt="Icon 4" className="w-10 h-10" />
+                <img src={twitter} alt="Twitter" className="w-10 h-10" />
               </a>
             </div>
           </div>
         </div>
       </div>
-      {/* Popup Message */}
       {isSubmitted && (
         <div
+          className="swasthya-footer-popup"
           style={{
-            position: "absolute",
+            position: "fixed",
             bottom: "80px",
             left: "50%",
             transform: "translateX(-50%)",
@@ -144,7 +136,8 @@ const Footer = () => {
         >
           Subscription Submitted!
           <button
-            onClick={() => setIsSubmitted(false)} // Close the popup
+            onClick={() => setIsSubmitted(false)}
+            className="swasthya-footer-popup-close"
             style={{
               marginLeft: "10px",
               backgroundColor: "#f9a826",
@@ -159,7 +152,7 @@ const Footer = () => {
           </button>
         </div>
       )}
-    </div>
+    </footer>
   );
 };
 

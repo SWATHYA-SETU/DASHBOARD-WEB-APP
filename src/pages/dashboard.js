@@ -9,6 +9,9 @@ import CreateMedicalShop from '../components/CreateMedicalShop';
 import MedicalShopInventory from '../components/MedicalShopInventory';
 import AdminDashboard from '../components/AdminDashboard';
 import VolunteerAssignments from '../components/Assignments'; 
+import CitizenDashboardCard from '../components/CitizenDashboardCard'; 
+import Lottie from 'lottie-react';
+import inventoryAnimation from '../assets/medicine.json';
 import BloodDonation from '../components/BloodDonation';
 import { UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
 
@@ -172,13 +175,18 @@ const Dashboard = () => {
             </div>
             {userData.medical_shop_id && (
               <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-                <div className="p-4 bg-blue-50">
-                  <h2 className="text-xl font-semibold text-blue-800">Inventory and Sales</h2>
-                </div>
-                <div className="p-4">
-                  <MedicalShopInventory medical_shop_id={userData.medical_shop_id} />
-                </div>
+              <div className="p-6 bg-blue-50 flex items-center justify-between">
+                <h2 className="text-2xl font-semibold text-blue-800">Inventory and Sales</h2>
+                <Lottie
+                  animationData={inventoryAnimation}
+                  style={{ width: 100, height: 100 }}
+                  className="ml-4"
+                />
               </div>
+              <div className="p-4">
+                <MedicalShopInventory medical_shop_id={userData.medical_shop_id} />
+              </div>
+            </div>
             )}
           </>
         );
@@ -186,15 +194,15 @@ const Dashboard = () => {
         return <AdminDashboard />;
       case 'volunteer':
         return <VolunteerAssignments volunteerId={userData.id} />;
-      case 'citizen':
+        case 'citizen':
         return (
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="p-4 bg-blue-50">
               <h2 className="text-xl font-semibold text-blue-800">Citizen Dashboard</h2>
             </div>
             <div className="p-4">
-              <p>Welcome, {userData.full_name}. This is your citizen dashboard.</p>
-              {/* Add more citizen-specific components or information here */}
+              <p className="mb-4">Welcome, {userData.full_name}. This is your citizen dashboard.</p>
+              <CitizenDashboardCard citizenId={userData.id} />
             </div>
           </div>
         );

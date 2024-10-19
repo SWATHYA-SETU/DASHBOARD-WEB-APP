@@ -9,12 +9,13 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Footer from "./components/footer";
 import Marquee from "./components/marquee";
-import "flowbite/dist/flowbite.css";
 import Contact from './pages/Contact';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/dashboard';
+import CardForm from './pages/CardForm'; 
 import UserProfile from './pages/userprofile';
+import HealthRecordCard from './pages/HealthReportCard';
 import AddHospital from './pages/addHospital'; // Add this import
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/swasthyacard" element={<CardForm />} />
+                <Route path="/card/:id" element={<HealthRecordCard />} />
                 <Route
                   path="/dashboard"
                   element={

@@ -1,11 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bars3Icon, XMarkIcon, HomeIcon, InformationCircleIcon, EnvelopeIcon, UserPlusIcon, UserIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, HomeIcon, InformationCircleIcon, EnvelopeIcon, UserPlusIcon, UserIcon, CreditCardIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useAuth } from '../autocontext'; // Adjust the import path as needed
 import { auth } from '../components/firebase'; // Adjust the import path as needed
 import { signOut } from 'firebase/auth';
+import { useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 import logo from '../assets/logo2.png';
+
+const CHECK_CITIZEN = gql`
+  query CheckCitizen($email: String!) {
+    citizens(where: {email: {_eq: $email}}) {
+      id
+    }
+  }
+`;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +23,13 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  const { data: citizenData, loading: citizenLoading } = useQuery(CHECK_CITIZEN, {
+    variables: { email: user?.email },
+    skip: !user?.email,
+  });
+
+  const isCitizen = !citizenLoading && citizenData?.citizens.length > 0;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -46,7 +63,7 @@ const Navbar = () => {
       <div className="px-4 py-2 text-sm text-gray-700">
         <p className="font-medium text-gray-900">{user.email}</p>
         {user.displayName && <p className="text-gray-600">{user.displayName}</p>}
-        {user.role && <p className="text-gray-600">{user.role}</p>}
+        <p className="text-gray-600">{isCitizen ? 'Citizen' : 'Non-Citizen'}</p>
       </div>
     );
   };
@@ -55,12 +72,10 @@ const Navbar = () => {
     <nav className="bg-blue-600 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-        <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <img src={logo} alt="Swasthya Setu Logo" className="h-14 w-14 rounded-full" />
             <span className="text-white text-2xl font-bold">Swasthya Setu</span>
           </Link>
-
-
 
           {/* Hamburger menu for mobile */}
           <div className="md:hidden">
@@ -84,6 +99,9 @@ const Navbar = () => {
             {user ? (
               <>
                 <NavLink to="/dashboard" icon={<UserIcon className="h-5 w-5" />}>Dashboard</NavLink>
+                {isCitizen && (
+                  <NavLink to="/swasthyacard" icon={<CreditCardIcon className="h-5 w-5" />}>SwasthyaCard</NavLink>
+                )}
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={toggleProfile}
@@ -136,6 +154,9 @@ const Navbar = () => {
             {user ? (
               <>
                 <NavLink to="/dashboard" icon={<UserIcon className="h-5 w-5" />} mobile>Dashboard</NavLink>
+                {isCitizen && (
+                  <NavLink to="/swasthyacard" icon={<CreditCardIcon className="h-5 w-5" />} mobile>SwasthyaCard</NavLink>
+                )}
                 <div className="py-2 px-4 text-white">
                   {renderUserInfo()}
                 </div>
