@@ -242,7 +242,7 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto mt-10 px-4">
       <h1 className="text-3xl font-bold mb-8 text-center">
-        Welcome to Your Dashboard as {getUserRoleDisplay(userRole)}
+        Welcome to Swasthya Setu Control Panel as {getUserRoleDisplay(userRole)}
       </h1>
       <div className="flex flex-col md:flex-row justify-center items-start space-y-6 md:space-y-0 md:space-x-6 mb-10">
         <div className="w-full md:w-2/3 order-2 md:order-1">
