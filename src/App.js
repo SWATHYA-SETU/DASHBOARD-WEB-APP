@@ -17,6 +17,8 @@ import CardForm from './pages/CardForm';
 import UserProfile from './pages/userprofile';
 import HealthRecordCard from './pages/HealthReportCard';
 import AddHospital from './pages/addHospital'; // Add this import
+import emailjs from '@emailjs/browser';
+emailjs.init("w-BPtYL_WIabHlHsv");
 
 function App() {
   return (

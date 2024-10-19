@@ -28,6 +28,7 @@ import bt from "../assets/bluetick.png";
 import h2 from "../assets/h2.png";
 import ms1 from "../assets/ml1.png";
 import c1 from "../assets/c1.png";
+
 const data = [
   {
     icon: FaTools,
@@ -72,6 +73,7 @@ const data = [
     label: "read more",
   },
 ];
+
 const packages = [
   {
     name: "Citizen",
@@ -117,14 +119,22 @@ const packages = [
 ];
 
 const Home = () => {
-  var settings = {
+  const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
     responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
@@ -151,236 +161,189 @@ const Home = () => {
       },
     ],
   };
+
   return (
-    <div className="md:px-12 p-4 max-w-screen-2x1 mx-auto mt-3">
-      <div className="gradientBg rounded-x1 rounded-br-[80px] md:p-9 px-4 py-9">
-        {/* Carousel Component */}
-        <Carousel className="h-96">
-          {/* First Slide */}
-          <div className="flex flex-col md:flex-row justify-between items-start gap-10">
-            {/* Banner Content */}
-            <div className="md:w-3/5 text-left pl-20 pt-4">
-              <h2 className="text-white text-4xl font-bold">
-                Empowering Health, Prioritizing Lives
-              </h2>
-              <p className="text-white text-lg mt-4">
-                Seamlessly connect with hospitals, pharmacies, and volunteers to
-                fight epidemics together, while accessing vital health
-                information, medication reminders, and outbreak predictions—all
-                at your fingertips.
-              </p>
-              <div className="mt-6">
+    <div className="w-full overflow-x-hidden">
+      <div className="md:px-12 p-4 max-w-screen-2xl mx-auto mt-3">
+        <div className="gradientBg rounded-xl rounded-br-[80px] md:p-9 px-4 py-9">
+          <Carousel className="h-[400px] sm:h-[500px]">
+            {/* First Slide */}
+            <div className="flex flex-col md:flex-row justify-between items-center h-full px-4 md:px-10">
+              <div className="md:w-1/2 text-left">
+                <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">
+                  Empowering Health, Prioritizing Lives
+                </h2>
+                <p className="text-white text-base md:text-lg mb-6">
+                  Seamlessly connect with hospitals, pharmacies, and volunteers to
+                  fight epidemics together, while accessing vital health
+                  information, medication reminders, and outbreak predictions—all
+                  at your fingertips.
+                </p>
                 <button className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
                   Get Started
                 </button>
               </div>
+              <div className="md:w-1/2 flex justify-center md:justify-end mt-6 md:mt-0">
+                <img src={banner} alt="" className="max-h-[200px] md:max-h-[300px] object-contain" />
+              </div>
             </div>
-            {/* Banner Image */}
-            <div className="md:w-2/5 flex justify-end pr-20 mr-4">
-              <img src={banner} alt="" className="lg:h-[300px]" />
-            </div>
-          </div>
 
-          {/* Second Slide */}
-          <div className="flex flex-col md:flex-row justify-between items-start gap-10">
-            {/* Banner Content */}
-            <div className="md:w-3/5 text-left pl-20 pt-4">
-              <h2 className="text-white text-4xl font-bold">
-                Stay Informed, Stay Healthy
-              </h2>
-              <p className="text-white text-lg mt-4">
-                Stay ahead of the curve with real-time updates on health
-                epidemics, weather conditions, and disease outbreaks. We help
-                you keep your family safe.
-              </p>
-              <div className="mt-6">
+            {/* Second Slide */}
+            <div className="flex flex-col md:flex-row justify-between items-center h-full px-4 md:px-10">
+              <div className="md:w-1/2 text-left">
+                <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">
+                  Stay Informed, Stay Healthy
+                </h2>
+                <p className="text-white text-base md:text-lg mb-6">
+                  Stay ahead of the curve with real-time updates on health
+                  epidemics, weather conditions, and disease outbreaks. We help
+                  you keep your family safe.
+                </p>
                 <button className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
                   Learn More
                 </button>
               </div>
-            </div>
-            {/* Banner Image */}
-            <div className="md:w-2/5 flex justify-end pr-20 mr-4">
-              <img src={banner2} alt="" className="lg:h-[300px]" />
-            </div>
-          </div>
-        </Carousel>
-      </div>
-      <div className="w-full bg-slate-200 h-fit flex flex-col justify-center items-center px-4 py-10 lg:px-20 lg:py-20 gap-6 bg-gradient-to-r from-blue-50 to-blue-100">
-        <h2 className="text-3xl font-bold text-blue-500">
-          Our Services & Features
-        </h2>
-        <p className="text-x1 text-center">
-          Discover our innovative solutions designed to enhance health
-          management, empower communities, and streamline access to essential
-          resources.
-        </p>
-        <div className="w-full h-fit p-8">
-          <Slider {...settings}>
-            {data.map((item, index) => (
-              <div
-                id="slider-boxes"
-                key={index}
-                className="bg-white p-4 rounded-xl flex flex-col justify-center items-center border-b-[8px] border-blue-600 w-[220px] h-[300px]"
-              >
-                <div
-                  id="icon-box"
-                  className="bg-yellow-400 p-6 rounded-full hover:bg-yellow-500 cursor-pointer "
-                >
-                  {item.icon && <item.icon className="w-[40px] h-[40px]" />}
-                </div>
-                <div className="flex flex-col justify-center items-center gap-4 mt-4">
-                  <h1 className="text-xl text black font-bold">{item.title}</h1>
-                  <p className="text-[15px] text-center">{item.para}</p>
-                </div>
+              <div className="md:w-1/2 flex justify-center md:justify-end mt-6 md:mt-0">
+                <img src={banner2} alt="" className="max-h-[200px] md:max-h-[300px] object-contain" />
               </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
-      <div className="w-full h-auto flex flex-col md:flex-row items-center justify-between px-8 py-16 bg-gradient-to-r from-blue-50 to-blue-100">
-        {/* Left: About Image */}
-        <div className="w-full md:w-[45%] h-full flex justify-center">
-          <img
-            src={aboutpic} // Use your actual image path here
-            alt="About Us"
-            className="rounded-lg shadow-lg w-full h-[400px] object-cover"
-          />
-        </div>
-
-        {/* Right: About Content */}
-        <div className="w-full md:w-[45%] h-full flex flex-col justify-center items-center mt-8 md:mt-0 ml-6">
-          <div className="bg-white p-8 rounded-xl shadow-2xl border-4 border-blue-500 hover:border-blue-700 transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-lg w-full h-[400px] flex flex-col justify-between">
-            <h3 className="text-2xl font-bold mb-4">
-              About <span className="text-blue-500">Our Software</span>
-            </h3>
-            <p className="text-lg text-gray-700 mb-4">
-              Our platform is designed to streamline epidemic management,
-              integrating hospitals, pharmacies, volunteers, and government
-              services for a unified response. With advanced real-time data
-              tracking, resource management tools, and alert systems, we empower
-              communities to stay informed and act quickly during health crises.
-            </p>
-
-            <div className="flex justify-between items-center mt-4">
-              <Lottie animationData={icon2} className="w-32 h-32" />{" "}
-              {/* Left Lottie Icon */}
-              <Lottie animationData={icon1} className="w-32 h-32" />{" "}
-              {/* Middle Lottie Icon */}
-              <Lottie animationData={icon3} className="w-32 h-32" />{" "}
-              {/* Right Lottie Icon */}
             </div>
-          </div>
+          </Carousel>
         </div>
-      </div>
-      {/*company stats*/}
-      <div className="px-4 lg:px-14 max-w-screen-2xl mx-auto bg-gradient-to-r from-blue-50 to-blue-100 py-16">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="md:w-1/2 pl-8">
-            <h2 className="text-4xl font-semibold text-gray-600 mb-7 md:w-2/3 pl-8">
-              Connecting Care<br></br>
-              <span className="text-blue-500"> Our Health Network!</span>
+
+        <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-blue-500 text-center mb-6">
+              Our Services & Features
             </h2>
-            <p className="max-w-[80%] -ml-6">
-              Join us in celebrating our incredible network of hospitals,
-              <br />
-              medical shops, and volunteers! Together, we are shaping <br />a
-              community where health is a priority and care is always <br />
-              within reach.
+            <p className="text-xl text-center mb-10">
+              Discover our innovative solutions designed to enhance health
+              management, empower communities, and streamline access to essential
+              resources.
             </p>
-          </div>
-          {/*stats*/}
-          <div className="md:w-1/2 mx-auto flex sm:flex-row flex-col sm:items-center justify-around gap-12">
-            <div className="space-y-8">
-              <div className="flex items-center gap-4">
-                <img src={h1} alt="" className="w-10 h-10" />
-                <div>
-                  <h4 className="text-2xl font-semibold text-gray-600">3000</h4>
-                  <p>Hospitals</p>
+            <Slider {...settings}>
+              {data.map((item, index) => (
+                <div key={index} className="px-2">
+                  <div className="bg-white p-6 rounded-xl flex flex-col justify-between items-center border-b-[8px] border-blue-600 h-[300px] shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div className="bg-yellow-400 p-6 rounded-full hover:bg-yellow-500 cursor-pointer mb-4">
+                      {item.icon && <item.icon className="w-[40px] h-[40px]" />}
+                    </div>
+                    <h3 className="text-xl text-black font-bold text-center mb-2">{item.title}</h3>
+                    <p className="text-sm text-center mb-4">{item.para}</p>
+                    <button className="text-blue-600 hover:text-blue-800 transition-colors duration-300">
+                      {item.label}
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={ms2} alt="" className="w-10 h-10" />
-                <div>
-                  <h4 className="text-2xl font-semibold text-gray-600">6000</h4>
-                  <p>Pharmacies</p>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-8">
-              <div className="flex items-center gap-4">
-                <img src={v1} alt="" className="w-10 h-10" />
-                <div>
-                  <h4 className="text-2xl font-semibold text-gray-600">
-                    20000
-                  </h4>
-                  <p>Volunteers</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={c2} alt="" className="w-10 h-10" />
-                <div>
-                  <h4 className="text-2xl font-semibold text-gray-600">
-                    250000
-                  </h4>
-                  <p>Users</p>
-                </div>
-              </div>
-            </div>
+              ))}
+            </Slider>
           </div>
         </div>
-      </div>
-      {/*3 cards mentioning the features the citizens, hospitals and pharmacies can use*/}
-      <div className="w-full bg-slate-200 h-fit flex flex-col justify-center items-center px-4 py-10 lg:px-20 lg:py-20 gap-6 bg-gradient-to-r from-blue-50 to-blue-100">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-blue-950">
-            How <span className="text-blue-500"> We Work!</span>
-          </h2>
-          <p className="text-x1 text-center">
-            Connecting people, healthcare, and resources for a healthier
-            tomorrow.
-          </p>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-20 md:w-11/12 mx-auto">
-          {packages.map((pkg, index) => (
-            <div
-              key={index}
-              className="bg-white border py-10 md:px-6 px-4 rounded-3xl shadow-4xl hover:shadow-2xl hover:scale-105 transform transition duration-300 ease-in-out"
-              style={{
-                boxShadow: "0 0 15px rgba(0, 0, 255, 0.1)", // Subtle glow effect
-              }}
-            >
-              {/* Added an icon image above each card heading */}
-              <div className="flex justify-center mb-4">
+
+        <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+              <div className="w-full lg:w-[45%]">
                 <img
-                  src={pkg.iconImage} // Replace with actual icon path
-                  alt={`${pkg.name} icon`}
-                  className="w-16 h-16"
+                  src={aboutpic}
+                  alt="About Us"
+                  className="rounded-lg shadow-lg w-full h-[400px] object-cover"
                 />
               </div>
-
-              <h3 className="text-3xl font-bold text-center text-blue-900">
-                {pkg.name}
-              </h3>
-              <p className="text-center my-5">{pkg.description}</p>
-
-              <ul className="mt-4 space-y-2 px-4">
-                {pkg.features.map((feature, featureIndex) => (
-                  <li
-                    className="flex gap-3 items-center text-blue-500" // Made list text color blue
-                    key={featureIndex}
-                  >
-                    <img src={pkg.blue} alt="" className="w-5 h-5" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <div className="w-full lg:w-[45%]">
+                <div className="bg-white p-8 rounded-xl shadow-2xl border-4 border-blue-500 hover:border-blue-700 transform hover:scale-105 transition-all duration-300 ease-in-out">
+                  <h3 className="text-2xl font-bold mb-4">
+                    About <span className="text-blue-500">Our Software</span>
+                  </h3>
+                  <p className="text-lg text-gray-700 mb-6">
+                    Our platform is designed to streamline epidemic management,
+                    integrating hospitals, pharmacies, volunteers, and government
+                    services for a unified response. With advanced real-time data
+                    tracking, resource management tools, and alert systems, we empower
+                    communities to stay informed and act quickly during health crises.
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <Lottie animationData={icon2} className="w-24 h-24" />
+                    <Lottie animationData={icon1} className="w-24 h-24" />
+                    <Lottie animationData={icon3} className="w-24 h-24" />
+                  </div>
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
+              <div className="lg:w-1/2">
+                <h2 className="text-4xl font-semibold text-gray-600 mb-6">
+                  Connecting Care<br />
+                  <span className="text-blue-500">Our Health Network!</span>
+                </h2>
+                <p className="text-lg mb-6">
+                  Join us in celebrating our incredible network of hospitals,
+                  medical shops, and volunteers! Together, we are shaping a community
+                  where health is a priority and care is always within reach.
+                </p>
+              </div>
+              <div className="lg:w-1/2 grid grid-cols-2 gap-8">
+                <StatsItem icon={h1} number="3000" text="Hospitals" />
+                <StatsItem icon={ms2} number="6000" text="Pharmacies" />
+                <StatsItem icon={v1} number="20000" text="Volunteers" />
+                <StatsItem icon={c2} number="250000" text="Users" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-blue-950 mb-4">
+                How <span className="text-blue-500">We Work!</span>
+              </h2>
+              <p className="text-xl">
+                Connecting people, healthcare, and resources for a healthier tomorrow.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {packages.map((pkg, index) => (
+                <PackageCard key={index} {...pkg} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Home;
+const StatsItem = ({ icon, number, text }) => (
+  <div className="flex items-center gap-4">
+    <img src={icon} alt="" className="w-10 h-10" />
+    <div>
+      <h4 className="text-2xl font-semibold text-gray-600">{number}</h4>
+      <p>{text}</p>
+    </div>
+  </div>
+);
+        const PackageCard = ({ name, description, features, blue, iconImage }) => (
+          <div className="bg-white border py-10 px-6 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-105 transform transition duration-300 ease-in-out"
+               style={{ boxShadow: "0 0 15px rgba(0, 0, 255, 0.1)" }}>
+            <div className="flex justify-center mb-4">
+              <img src={iconImage} alt={`${name} icon`} className="w-16 h-16" />
+            </div>
+            <h3 className="text-3xl font-bold text-center text-blue-900 mb-4">{name}</h3>
+            <p className="text-center mb-6">{description}</p>
+            <ul className="mt-4 space-y-2 px-4">
+              {features.map((feature, featureIndex) => (
+                <li key={featureIndex} className="flex items-center gap-2 text-blue-500">
+                  <img src={blue} alt="" className="w-5 h-5 flex-shrink-0" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+        
+        export default Home;
