@@ -237,7 +237,7 @@ const AdminDashboard = () => {
     const medicines = medicineSearchTerm.length > 0 || Object.values(medicineFilters).some(v => v !== '') 
       ? dataSearchMedicines?.medical_shop_inventory 
       : dataTopMedicines?.medical_shop_inventory;
-
+  
     return (
       <div className="bg-white rounded-lg shadow-md p-6 mb-6">
         <h2 className="text-2xl font-bold mb-4">Medicine Inventory</h2>
@@ -309,20 +309,23 @@ const AdminDashboard = () => {
           </div>
         )}
         {loadingSearchMedicines ? (
-          <p>Searching...</p>
-        ) : errorSearchMedicines ? (
-          <p>Error: {errorSearchMedicines.message}</p>
-        ) : (
-          <div className="overflow-x-auto">
+        <p>Searching...</p>
+      ) : errorSearchMedicines ? (
+        <p>Error: {errorSearchMedicines.message}</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Medicine Name</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Stock</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Sales</th>
+              </tr>
+            </thead>
+          </table>
+          <div className="max-h-[144px] overflow-y-auto">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Medicine Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Stock</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Sales</th>
-                </tr>
-              </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {medicines?.map((medicine) => (
                   <tr key={medicine.id}>
@@ -335,10 +338,11 @@ const AdminDashboard = () => {
               </tbody>
             </table>
           </div>
-        )}
-      </div>
-    );
-  };
+        </div>
+      )}
+    </div>
+  );
+};
 
   return (
     <div className="space-y-6">

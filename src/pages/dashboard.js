@@ -10,6 +10,7 @@ import MedicalShopInventory from '../components/MedicalShopInventory';
 import AdminDashboard from '../components/AdminDashboard';
 import VolunteerAssignments from '../components/Assignments'; 
 import CitizenDashboardCard from '../components/CitizenDashboardCard'; 
+import AssignmentManager from '../components/AssignmentManager';
 import Lottie from 'lottie-react';
 import inventoryAnimation from '../assets/medicine.json';
 import BloodDonation from '../components/BloodDonation';
@@ -191,7 +192,14 @@ const Dashboard = () => {
           </>
         );
       case 'admin_user':
-        return <AdminDashboard />;
+      return (
+        <>
+          <AdminDashboard />
+          <div className="mt-8">
+            <AssignmentManager />
+          </div>
+        </>
+      );
       case 'volunteer':
         return <VolunteerAssignments volunteerId={userData.id} />;
         case 'citizen':
@@ -204,6 +212,7 @@ const Dashboard = () => {
               <p className="mb-4">Welcome, {userData.full_name}. This is your citizen dashboard.</p>
               <CitizenDashboardCard citizenId={userData.id} />
             </div>
+            
           </div>
         );
       default:

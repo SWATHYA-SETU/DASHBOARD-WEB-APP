@@ -211,7 +211,6 @@ const Login = () => {
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
         >
           <FaGoogle className="mr-2" />
           {loading ? 'Logging in...' : 'Login with Google'}
@@ -225,7 +224,6 @@ const Login = () => {
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
         >
           Forgot Password?
         </motion.button>
