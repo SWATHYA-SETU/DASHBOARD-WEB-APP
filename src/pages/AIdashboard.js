@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import SymptomPredictor from '../components/SymptomPredictor';
-import { ArrowPathIcon } from '@heroicons/react/24/outline';
+import { ArrowPathIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import IndiaDiseaseMap from '../components/IndiaDiseaseMap';
+import diseaseData from '../components/diseaseData';
 
 const AIDashboard = () => {
   const [location, setLocation] = useState(null);
   const [areaName, setAreaName] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [selectedDisease, setSelectedDisease] = useState('Malaria');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const requestLocation = useCallback(() => {
     setIsRefreshing(true);
@@ -69,6 +73,13 @@ const AIDashboard = () => {
     requestLocation();
   };
 
+  
+
+  const handleDiseaseChange = (disease) => {
+    setSelectedDisease(disease);
+    setIsDropdownOpen(false);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-primary mb-6">AI Health Dashboard</h1>
@@ -112,7 +123,7 @@ const AIDashboard = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">AI-Powered Health Predictions</h2>
           <SymptomPredictor />
@@ -134,6 +145,44 @@ const AIDashboard = () => {
         </div>
       </div>
       
+      <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold mb-4">Disease Map of India</h2>
+        <div className="mb-4 relative">
+          <label htmlFor="disease-select" className="block text-sm font-medium text-gray-700 mb-2">
+            Select Disease:
+          </label>
+          <div className="relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="w-full bg-white border border-gray-300 rounded-md py-2 px-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <span className="block truncate">{selectedDisease}</span>
+              <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <ChevronDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </span>
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                {Object.keys(diseaseData).map((disease) => (
+                  <button
+                    key={disease}
+                    onClick={() => handleDiseaseChange(disease)}
+                    className={`${
+                      disease === selectedDisease ? 'text-white bg-indigo-600' : 'text-gray-900'
+                    } cursor-default select-none relative py-2 pl-3 pr-9 w-full text-left hover:bg-indigo-100`}
+                  >
+                    {disease}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="w-full lg:w-3/4 mx-auto" style={{ height: '500px' }}>
+          <IndiaDiseaseMap diseaseData={diseaseData} selectedDisease={selectedDisease} />
+        </div>
+      </div>
+
       <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold mb-4">AI in Healthcare: What's Next?</h2>
         <p className="text-gray-700">
