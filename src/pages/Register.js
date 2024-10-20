@@ -340,7 +340,7 @@ const Register = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center justify-center text-sm leading-5 w-8 h-10"
+                className="absolute inset-y-0 right-1 pr-3 flex items-center justify-center text-sm leading-5 w-8 h-10"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
@@ -364,8 +364,8 @@ const Register = () => {
               name="dateOfBirth"
               value={formData.dateOfBirth}
               onChange={handleChange}
-              style = {{ color: '#9CA3AF'}}
-              className="w-full px-3 py-2 mb-3 border rounded-md"
+              style={{ color: ' #9CA3AF' }}
+              className="w-full px-3 py-2 mb-3 border rounded-md f"
               required
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

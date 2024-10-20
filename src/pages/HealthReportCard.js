@@ -6,11 +6,7 @@ import {
   PhoneIcon, 
   CalendarIcon, 
   MapPinIcon, 
-  ClipboardDocumentListIcon,
   UserCircleIcon,
-  BuildingOffice2Icon,
-  AcademicCapIcon,
-  DocumentTextIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
 
