@@ -92,11 +92,11 @@ const About = () => {
             Our mission is to create a resilient global community by:
           </p>
           <ul className="list-disc list-inside mt-4 space-y-2 text-gray-600">
-            <li>Providing real-time, accurate information to empower informed decision-making</li>
-            <li>Facilitating seamless connections between patients, healthcare providers, and vital resources</li>
-            <li>Leveraging data analytics to predict and mitigate health crises</li>
-            <li>Fostering a supportive ecosystem that prioritizes both physical and mental well-being</li>
-            <li>Ensuring equitable access to healthcare services and supplies during emergencies</li>
+            <li>Providing real-time, accurate information to empower informed decision-making.</li>
+            <li>Facilitating seamless connections between patients, healthcare providers, and vital resources.</li>
+            <li>Leveraging data analytics to predict and mitigate health crises.</li>
+            <li>Fostering a supportive ecosystem that prioritizes both physical and mental well-being.</li>
+            <li>Ensuring equitable access to healthcare services and supplies during emergencies.</li>
           </ul>
         </motion.div>
 
