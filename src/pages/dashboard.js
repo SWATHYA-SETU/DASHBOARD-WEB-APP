@@ -13,7 +13,7 @@ import CitizenDashboardCard from '../components/CitizenDashboardCard';
 import Lottie from 'lottie-react';
 import inventoryAnimation from '../assets/medicine.json';
 import BloodDonation from '../components/BloodDonation';
-import { UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
+import { UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon, BuildingOfficeIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 const GET_USER_DATA = gql`
   query GetUserData($firebase_uid: String!) {
@@ -244,6 +244,14 @@ const Dashboard = () => {
       <h1 className="text-3xl font-bold mb-8 text-center">
         Welcome to Swasthya Setu Control Panel as {getUserRoleDisplay(userRole)}
       </h1>
+      <Link
+          to="/ai-dashboard"
+          className="group relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-bold text-white rounded-md shadow-2xl bg-gradient-to-br from-purple-600 to-blue-500 hover:from-purple-500 hover:to-blue-400 active:from-purple-700 active:to-blue-600 transition-all duration-300 ease-out hover:scale-105 focus:outline-none"
+        >
+          <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+          <SparklesIcon className="w-5 h-5 mr-2" />
+          <span className="relative">AI Dashboard</span>
+        </Link>
       <div className="flex flex-col md:flex-row justify-center items-start space-y-6 md:space-y-0 md:space-x-6 mb-10">
         <div className="w-full md:w-2/3 order-2 md:order-1">
           {renderDetailsComponent()}
