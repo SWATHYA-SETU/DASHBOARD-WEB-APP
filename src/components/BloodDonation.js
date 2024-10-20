@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { 
   PlusIcon, 
@@ -8,7 +8,9 @@ import {
   UserIcon,
   MapPinIcon,
   PhoneIcon,
-  ClipboardDocumentListIcon
+  ClipboardDocumentListIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from '@heroicons/react/24/outline';
 const GET_BLOOD_DONATIONS = gql`
   query GetBloodDonations {
@@ -121,6 +123,12 @@ const BloodDonation = ({ userId, userRole }) => {
     donation.blood_group.toLowerCase().includes(searchTerm.toLowerCase()) ||
     donation.area.toLowerCase().includes(searchTerm.toLowerCase())
   ) || [];
+
+  const scrollContainerRef = useRef(null);
+
+  const scroll = (scrollOffset) => {
+    scrollContainerRef.current.scrollLeft += scrollOffset;
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -239,46 +247,64 @@ const BloodDonation = ({ userId, userRole }) => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredDonations.map(donation => (
-          <div key={donation.id} className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2 flex items-center text-primary">
-                <HeartIcon className="h-6 w-6 text-red-500 mr-2" />
-                {donation.blood_group}
-              </div>
-              <p className="text-gray-700 text-base mb-2 flex items-center">
-                <MapPinIcon className="h-5 w-5 text-gray-500 mr-2" />
-                {donation.area}
-              </p>
-              <p className="text-gray-700 text-base mb-2 flex items-center">
-                <PhoneIcon className="h-5 w-5 text-gray-500 mr-2" />
-                {donation.contact}
-              </p>
-              {donation.specific_requirement && (
+<div className="relative">
+        <button
+          onClick={() => scroll(-300)}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
+        >
+          <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
+        </button>
+        <button
+          onClick={() => scroll(300)}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
+        >
+          <ChevronRightIcon className="h-6 w-6 text-gray-600" />
+        </button>
+        <div 
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide"
+          style={{ scrollBehavior: 'smooth' }}
+        >
+          {filteredDonations.map(donation => (
+            <div key={donation.id} className="flex-none w-80 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out">
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2 flex items-center text-primary">
+                  <HeartIcon className="h-6 w-6 text-red-500 mr-2" />
+                  {donation.blood_group}
+                </div>
                 <p className="text-gray-700 text-base mb-2 flex items-center">
-                  <ClipboardDocumentListIcon className="h-5 w-5 text-gray-500 mr-2" />
-                  {donation.specific_requirement}
+                  <MapPinIcon className="h-5 w-5 text-gray-500 mr-2" />
+                  {donation.area}
                 </p>
-              )}
-              <p className="text-gray-600 text-sm mb-2 flex items-center">
-                <UserIcon className="h-5 w-5 text-gray-500 mr-2" />
-                {donation.requireduser_id ? 'Request' : 'Donation offer'}
-              </p>
+                <p className="text-gray-700 text-base mb-2 flex items-center">
+                  <PhoneIcon className="h-5 w-5 text-gray-500 mr-2" />
+                  {donation.contact}
+                </p>
+                {donation.specific_requirement && (
+                  <p className="text-gray-700 text-base mb-2 flex items-center">
+                    <ClipboardDocumentListIcon className="h-5 w-5 text-gray-500 mr-2" />
+                    {donation.specific_requirement}
+                  </p>
+                )}
+                <p className="text-gray-600 text-sm mb-2 flex items-center">
+                  <UserIcon className="h-5 w-5 text-gray-500 mr-2" />
+                  {donation.requireduser_id ? 'Request' : 'Donation offer'}
+                </p>
+              </div>
+              <div className="px-6 py-4">
+                {!donation.donor_id && userId !== donation.requireduser_id && (
+                  <button
+                    onClick={() => handleDonate(donation.id)}
+                    className="w-full bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded inline-flex items-center justify-center transition duration-300 ease-in-out"
+                  >
+                    <HeartIcon className="h-5 w-5 mr-2" />
+                    Donate
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="px-6 py-4">
-              {!donation.donor_id && userId !== donation.requireduser_id && (
-                <button
-                  onClick={() => handleDonate(donation.id)}
-                  className="w-full bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded inline-flex items-center justify-center transition duration-300 ease-in-out"
-                >
-                  <HeartIcon className="h-5 w-5 mr-2" />
-                  Donate
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
