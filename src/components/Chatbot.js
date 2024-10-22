@@ -1,6 +1,4 @@
-// src/components/Chatbot.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchGeminiAnswer } from './Gemini.js';
 import ReactMarkdown from 'react-markdown'; // Import the Markdown component
 import './Chatbot.css'; // Add your styles here
@@ -8,6 +6,15 @@ import './Chatbot.css'; // Add your styles here
 const Chatbot = ({ onClose }) => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+
+  // Automatically send a welcome message when the chatbot is loaded
+  useEffect(() => {
+    const welcomeMessage = {
+      text: `**Welcome!** I'm here to assist you with disease information, symptoms, and treatment suggestions. Please ask me anything about a disease, and I'll provide a summary of common symptoms and remedies.`,
+      sender: 'bot',
+    };
+    setMessages([welcomeMessage]);
+  }, []);
 
   const sendMessage = async (e) => {
     e.preventDefault();
