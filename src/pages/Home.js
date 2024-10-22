@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Carousel } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 // import banner from "../assets/banner_1_bgrm.png";
 // import banner2 from "../assets/banner_2_bgrm.png";
@@ -30,6 +31,9 @@ import bt from "../assets/bluetick.png";
 import h2 from "../assets/h2.png";
 import ms1 from "../assets/ml1.png";
 import c1 from "../assets/c1.png";
+
+
+
 
 const data = [
   {
@@ -114,6 +118,8 @@ const packages = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const settings = {
     dots: false,
     infinite: true,
@@ -174,7 +180,7 @@ const Home = () => {
                   information, medication reminders, and outbreak
                   predictions—all at your fingertips.
                 </p>
-                <button className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
+                <button onClick = {() => navigate('/login')} className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
                   Get Started
                 </button>
               </div>
@@ -197,7 +203,7 @@ const Home = () => {
                   epidemics, weather conditions, and disease outbreaks. We help
                   you keep your family safe.
                 </p>
-                <button className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
+                <button onClick={() => navigate('/about')} className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
                   Learn More
                 </button>
               </div>
