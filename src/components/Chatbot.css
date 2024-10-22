@@ -139,3 +139,20 @@
     border-radius: 5px;
   }
   
+  /* Share button styling */
+.share-conversation-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #25D366; /* WhatsApp green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .share-conversation-button:hover {
+    background-color: #1EBE5F; /* Darker green on hover */
+  }
+  
