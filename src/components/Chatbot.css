@@ -1,12 +1,12 @@
 /* Chatbot.css */
 
-/* Chatbox container for reference */
+/* Chatbox container */
 .chatbot-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px; /* Larger width */
-  height: 600px; /* Larger height */
+  width: 400px;
+  height: 600px;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -54,26 +54,32 @@
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for chat bubbles */
-  max-width: 70%;
+  max-width: 75%; /* Adjust to max width */
+  display: block; /* Each message will take a full line */
+  word-wrap: break-word; /* Ensure long words break correctly */
 }
 
 /* User's message (blue bubble) */
 .message.user {
   background-color: #007bff;
   color: white;
-  align-self: flex-end; /* Ensure message is aligned to the right */
+  align-self: flex-end; /* Align to the right */
   text-align: right;
-  border-radius: 12px 12px 0 12px; /* Minimal rounded corners */
-  margin-left: auto; /* Make the user bubble stay to the right of the chatbox */
+  border-radius: 12px 12px 0 12px;
+  margin-left: auto;
+  margin-bottom: 15px; /* Space after user message */
+  margin-right: 0;
+  max-width: 45%; /* Make the blue bubble smaller */
 }
 
 /* Bot's message (white bubble) */
 .message.bot {
   background-color: #f1f1f1;
   color: black;
-  align-self: flex-start; /* Ensure message is aligned to the left */
+  align-self: flex-start; /* Align to the left */
   text-align: left;
-  border-radius: 12px 12px 12px 0; /* Minimal rounded corners */
+  border-radius: 12px 12px 12px 0;
+  margin-top: 15px; /* Space before bot message */
 }
 
 .chatbot-input {

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { fetchGeminiAnswer } from './Gemini.js';
-import ReactMarkdown from 'react-markdown'; // Import the Markdown component
+import ReactMarkdown from 'react-markdown';
 import './Chatbot.css'; // Add your styles here
 
 const Chatbot = ({ onClose }) => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null); // Reference to the end of the messages list
 
   // Automatically send a welcome message when the chatbot is loaded
   useEffect(() => {
@@ -15,6 +16,16 @@ const Chatbot = ({ onClose }) => {
     };
     setMessages([welcomeMessage]);
   }, []);
+
+  // Function to scroll to the bottom of the chatbox
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Scroll to the bottom whenever messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -37,7 +48,7 @@ const Chatbot = ({ onClose }) => {
       ]);
     }
 
-    setInput('');
+    setInput(''); // Clear the input after sending the message
   };
 
   return (
@@ -57,6 +68,7 @@ const Chatbot = ({ onClose }) => {
             )}
           </div>
         ))}
+        <div ref={messagesEndRef} /> {/* This div marks the end of the chat */}
       </div>
       <form onSubmit={sendMessage} className="chatbot-input">
         <input
