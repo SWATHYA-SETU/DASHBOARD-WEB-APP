@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchGeminiAnswer } from './Gemini.js';
 import ReactMarkdown from 'react-markdown';
-import './Chatbot.css'; // Add your styles here
+import doctors from '../assets/doctors.json'; // Import your doctors list
+import './Chatbot.css'; 
 
 const Chatbot = ({ onClose }) => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const messagesEndRef = useRef(null); // Reference to the end of the messages list
+  const [conversationType, setConversationType] = useState(null); // Track conversation type
+  const [assignedDoctor, setAssignedDoctor] = useState(null); // Track assigned doctor
+  const messagesEndRef = useRef(null); 
 
   // Automatically send a welcome message when the chatbot is loaded
   useEffect(() => {
     const welcomeMessage = {
-      text: `**Welcome!** I'm here to assist you with disease information, symptoms, and treatment suggestions. Please ask me anything about a disease, and I'll provide a summary of common symptoms, precautions and disease details.`,
+      text: `**Welcome!** Please choose an option: \n\n - **Speak to a Doctor** \n - **Search Information**`,
       sender: 'bot',
     };
     setMessages([welcomeMessage]);
@@ -27,25 +30,68 @@ const Chatbot = ({ onClose }) => {
     scrollToBottom();
   }, [messages]);
 
-  const sendMessage = async (e) => {
-    e.preventDefault();
+  // Assign random doctor when "Speak to a Doctor" is selected
+  const assignRandomDoctor = () => {
+    const randomDoctor = doctors[Math.floor(Math.random() * doctors.length)];
+    setAssignedDoctor(randomDoctor);
     setMessages((prevMessages) => [
       ...prevMessages,
-      { text: input, sender: 'user' },
+      { text: `You are now connected with **${randomDoctor.name}**, a **${randomDoctor.specialty}**. How can I assist you today?`, sender: 'bot' },
     ]);
+  };
 
-    try {
-      const response = await fetchGeminiAnswer(input);
+  const handleConversationChoice = (choice) => {
+    if (choice.toLowerCase() === 'speak to a doctor') {
+      setConversationType('doctor');
+      assignRandomDoctor();
+    } else if (choice.toLowerCase() === 'search information') {
+      setConversationType('info');
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: response, sender: 'bot' },
+        { text: 'You can now ask me about any disease!', sender: 'bot' },
       ]);
-    } catch (error) {
-      console.error('Error sending message:', error);
+    } else {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: 'Error fetching response.', sender: 'bot' },
+        { text: 'Please choose either "Speak to a Doctor" or "Search Information".', sender: 'bot' },
       ]);
+    }
+  };
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    
+    // If conversation type is not selected yet, handle choice
+    if (!conversationType) {
+      handleConversationChoice(input);
+    } else {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: input, sender: 'user' },
+      ]);
+
+      try {
+        if (conversationType === 'info') {
+          const response = await fetchGeminiAnswer(input);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: response, sender: 'bot' },
+          ]);
+        } else if (conversationType === 'doctor') {
+          // Simulate doctor response
+          const doctorResponse = `Dr. ${assignedDoctor.name}: Based on your question, here's my advice...`;
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: doctorResponse, sender: 'bot' },
+          ]);
+        }
+      } catch (error) {
+        console.error('Error sending message:', error);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: 'Error fetching response.', sender: 'bot' },
+        ]);
+      }
     }
 
     setInput(''); // Clear the input after sending the message
@@ -61,10 +107,9 @@ const Chatbot = ({ onClose }) => {
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender}`}>
             {msg.sender === 'bot' ? (
-              // Render bot messages with Markdown
               <ReactMarkdown>{msg.text}</ReactMarkdown>
             ) : (
-              msg.text // Render user messages as plain text
+              msg.text
             )}
           </div>
         ))}
