@@ -63,7 +63,7 @@ const Footer = () => {
               />
             </form>
           </div>
-          <div className="swasthya-footer-right md:w-1/2 space-y-4 mt-4 ml-6 md:mt-0 flex flex-col items-start">
+          <div className="swasthya-footer-right md:w-1/2 space-y-4 mt-4 ml-6 md:mt-0 flex flex-col items-end">
             <div className="swasthya-footer-contact space-y-2 text-right">
               <div className="flex items-center">
                 <FaEnvelope className="mr-2" />

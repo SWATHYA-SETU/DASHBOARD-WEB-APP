@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import SymptomPredictor from '../components/SymptomPredictor';
+import SymptomAnalyzer from '../components/SymptomAnalyzer';  // Add this import
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 const AIDashboard = () => {
@@ -119,6 +120,13 @@ const AIDashboard = () => {
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold mb-4">Symptom Analysis</h2>
+          <SymptomAnalyzer />  {/* Added the new component here */}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+        <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Latest Health Research</h2>
           <ul className="space-y-2">
             <li>
@@ -132,18 +140,18 @@ const AIDashboard = () => {
             </li>
           </ul>
         </div>
-      </div>
-      
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">AI in Healthcare: What's Next?</h2>
-        <p className="text-gray-700">
-          Artificial Intelligence is revolutionizing healthcare by improving diagnosis accuracy, 
-          treatment effectiveness, and patient care. From predictive analytics to robotic surgery, 
-          AI is paving the way for more personalized and efficient healthcare solutions.
-        </p>
-        <button className="mt-4 bg-secondary text-white py-2 px-4 rounded hover:bg-secondary-dark transition duration-300">
-          Learn More
-        </button>
+        
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold mb-4">AI in Healthcare: What's Next?</h2>
+          <p className="text-gray-700">
+            Artificial Intelligence is revolutionizing healthcare by improving diagnosis accuracy, 
+            treatment effectiveness, and patient care. From predictive analytics to robotic surgery, 
+            AI is paving the way for more personalized and efficient healthcare solutions.
+          </p>
+          <button className="mt-4 bg-secondary text-white py-2 px-4 rounded hover:bg-secondary-dark transition duration-300">
+            Learn More
+          </button>
+        </div>
       </div>
     </div>
   );
