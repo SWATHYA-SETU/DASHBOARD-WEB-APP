@@ -1,20 +1,22 @@
+// src/components/Chatbot.js
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchGeminiAnswer } from './Gemini.js';
 import ReactMarkdown from 'react-markdown';
-import doctors from '../assets/doctors.json'; // Import your doctors list
-import './Chatbot.css'; 
+import './Chatbot.css'; // Add your styles here
+import doctorsList from '../assets/doctors.json'; // Mock list of doctors for now
 
 const Chatbot = ({ onClose }) => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const [conversationType, setConversationType] = useState(null); // Track conversation type
-  const [assignedDoctor, setAssignedDoctor] = useState(null); // Track assigned doctor
-  const messagesEndRef = useRef(null); 
+  const [chatMode, setChatMode] = useState(null); // Track chat mode (doctor or search)
+  const [assignedDoctor, setAssignedDoctor] = useState(null); // Store assigned doctor
+  const [chatLocked, setChatLocked] = useState(false); // Prevent switching modes
+  const messagesEndRef = useRef(null); // Reference to the end of the messages list
 
   // Automatically send a welcome message when the chatbot is loaded
   useEffect(() => {
     const welcomeMessage = {
-      text: `**Welcome!** Please choose an option: \n\n - **Speak to a Doctor** \n - **Search Information**`,
+      text: `**Welcome!** Please choose one of the following options to continue:`,
       sender: 'bot',
     };
     setMessages([welcomeMessage]);
@@ -30,61 +32,50 @@ const Chatbot = ({ onClose }) => {
     scrollToBottom();
   }, [messages]);
 
-  // Assign random doctor when "Speak to a Doctor" is selected
-  const assignRandomDoctor = () => {
-    const randomDoctor = doctors[Math.floor(Math.random() * doctors.length)];
-    setAssignedDoctor(randomDoctor);
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: `You are now connected with **${randomDoctor.name}**, a **${randomDoctor.specialty}**. How can I assist you today?`, sender: 'bot' },
-    ]);
-  };
+  const handleOptionSelect = (option) => {
+    if (chatLocked) return; // Prevent changing the option once selected
 
-  const handleConversationChoice = (choice) => {
-    if (choice.toLowerCase() === 'speak to a doctor') {
-      setConversationType('doctor');
-      assignRandomDoctor();
-    } else if (choice.toLowerCase() === 'search information') {
-      setConversationType('info');
+    if (option === 'doctor') {
+      // Assign a random doctor
+      const randomDoctor = doctorsList[Math.floor(Math.random() * doctorsList.length)];
+      setAssignedDoctor(randomDoctor);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: 'You can now ask me about any disease!', sender: 'bot' },
+        { text: `You are now connected with Dr. ${randomDoctor.name}. Please wait until the doctor accepts your request.`, sender: 'bot' },
       ]);
-    } else {
+      setChatMode('doctor');
+      setChatLocked(true); // Lock chat mode
+    } else if (option === 'info') {
+      // Proceed with information search
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: 'Please choose either "Speak to a Doctor" or "Search Information".', sender: 'bot' },
+        { text: `You have selected "Search Information". Ask me anything about diseases, symptoms, and treatments!`, sender: 'bot' },
       ]);
+      setChatMode('info');
+      setChatLocked(true); // Lock chat mode
     }
   };
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    
-    // If conversation type is not selected yet, handle choice
-    if (!conversationType) {
-      handleConversationChoice(input);
-    } else {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { text: input, sender: 'user' },
+    ]);
+
+    // Handle response based on selected chat mode
+    if (chatMode === 'doctor') {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: input, sender: 'user' },
+        { text: `Your message has been sent to Dr. ${assignedDoctor.name}. Waiting for a response...`, sender: 'bot' },
       ]);
-
+    } else if (chatMode === 'info') {
       try {
-        if (conversationType === 'info') {
-          const response = await fetchGeminiAnswer(input);
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: response, sender: 'bot' },
-          ]);
-        } else if (conversationType === 'doctor') {
-          // Simulate doctor response
-          const doctorResponse = `Dr. ${assignedDoctor.name}: Based on your question, here's my advice...`;
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: doctorResponse, sender: 'bot' },
-          ]);
-        }
+        const response = await fetchGeminiAnswer(input);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: response, sender: 'bot' },
+        ]);
       } catch (error) {
         console.error('Error sending message:', error);
         setMessages((prevMessages) => [
@@ -113,18 +104,33 @@ const Chatbot = ({ onClose }) => {
             )}
           </div>
         ))}
-        <div ref={messagesEndRef} /> {/* This div marks the end of the chat */}
+        <div ref={messagesEndRef} />
       </div>
-      <form onSubmit={sendMessage} className="chatbot-input">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
-          required
-        />
-        <button type="submit">Send</button>
-      </form>
+
+      {/* Display options only at the start */}
+      {chatMode === null && (
+        <div className="options">
+          <button className = 'option-button' onClick={() => handleOptionSelect('doctor')}>Speak to a Doctor</button>
+          <button className = 'option-button' onClick={() => handleOptionSelect('info')}>Search Information</button>
+        </div>
+      )}
+
+      {/* Input form appears only when an option has been selected */}
+      {chatMode && (
+        <form onSubmit={sendMessage} className="chatbot-input">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your message..."
+            required
+            disabled={chatMode === 'doctor'} // Disable input when in doctor mode until backend integration
+          />
+          <button type="submit" disabled={chatMode === 'doctor'}>
+            Send
+          </button>
+        </form>
+      )}
     </div>
   );
 };
