@@ -18,6 +18,7 @@ import UserProfile from './pages/userprofile';
 import HealthRecordCard from './pages/HealthReportCard';
 import AddHospital from './pages/addHospital'; // Add this import
 import emailjs from '@emailjs/browser';
+import ChatbotToggle from './components/ChatbotToggle';
 emailjs.init("w-BPtYL_WIabHlHsv");
 
 function App() {
@@ -64,6 +65,8 @@ function App() {
               </Routes>
             </main>
             <Footer />
+            <ChatbotToggle />
+            {/* <PromptResponder /> */}
           </div>
         </Router>
       </AuthProvider>
