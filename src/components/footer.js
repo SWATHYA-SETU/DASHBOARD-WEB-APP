@@ -50,7 +50,7 @@ const Footer = () => {
               <input
                 type="submit"
                 value="Submit"
-                className="swasthya-footer-submit bg-[#f9a826] py-2 px-4 rounded-md -ml-2 cursor-pointer bg-white text-black transition duration-300 relative overflow-hidden"
+                className="swasthya-footer-submit py-2 px-4 rounded-md -ml-2 cursor-pointer bg-white text-black transition duration-300 relative overflow-hidden"
                 style={{
                   marginLeft: "10px",
                   width: "90px",
