@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AIDashboard from './pages/AIdashboard';
 import { ApolloProvider } from '@apollo/client';
 import client from './apollo'; // Make sure this path is correct
 import { AuthProvider } from './autocontext';
@@ -8,6 +9,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Footer from "./components/footer";
+import SymptomPredictor from './components/SymptomPredictor';
 import Marquee from "./components/marquee";
 import Contact from './pages/Contact';
 import Register from './pages/Register';
@@ -38,6 +40,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/swasthyacard" element={<CardForm />} />
                 <Route path="/card/:id" element={<HealthRecordCard />} />
+                <Route path="/ai-dashboard" element={<AIDashboard />} />
+                <Route path="/symptom-predictor" element={<SymptomPredictor />} />
                 <Route
                   path="/dashboard"
                   element={

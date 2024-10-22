@@ -32,9 +32,7 @@ const Footer = () => {
             </a>
 
             <p className="swasthya-footer-description text-justify px-7">
-              Subscribe to be updated with the important alerts,
-              <br />
-              and exclusive insights delivered straight to your inbox.
+              Subscribe to be updated with the important alerts, and exclusive insights delivered straight to your inbox.
             </p>
             <form onSubmit={handleSubmit} className="swasthya-footer-form flex items-center">
               <input
@@ -44,6 +42,7 @@ const Footer = () => {
                 placeholder="Your email"
                 className="swasthya-footer-input bg-white py-2 px-7 rounded-md focus:outline-none w-full md:w-auto text-black"
                 style={{ width: "280px", marginLeft: "25px", zIndex: 10 }}
+
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -65,7 +64,7 @@ const Footer = () => {
               />
             </form>
           </div>
-          <div className="swasthya-footer-right md:w-1/2 space-y-4 mt-4 md:mt-0 flex flex-col items-end">
+          <div className="swasthya-footer-right md:w-1/2 space-y-4 mt-4 ml-6 md:mt-0 flex flex-col items-start">
             <div className="swasthya-footer-contact space-y-2 text-right">
               <div className="flex items-center">
                 <FaEnvelope className="mr-2" />

@@ -191,7 +191,7 @@ const Home = () => {
             </div>
 
             {/* Second Slide */}
-            <div className="flex flex-col md:flex-row justify-between items-center h-full px-4 md:px-10">
+            <div className="flex flex-col md:flex-row justify-between items-center h-full px-4 md:px-10 mb-10">
               <div className="md:w-1/2 text-left">
                 <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">
                   Stay Informed, Stay Healthy
@@ -302,7 +302,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
         <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16 rounded-xl rounded-br-[80px]">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { useAuth } from '../autocontext';
 import { motion, AnimatePresence } from 'framer-motion';
