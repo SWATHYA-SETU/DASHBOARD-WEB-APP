@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { useAuth } from '../autocontext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PencilIcon, XMarkIcon, CheckIcon, EyeIcon, PlusIcon, ClockIcon, BuildingOffice2Icon, UserIcon, CalendarIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, XMarkIcon, CheckIcon, EyeIcon, PlusIcon, ClockIcon, BuildingOffice2Icon, UserIcon, CalendarIcon } from '@heroicons/react/24/outline';
 
 
 const GET_CITIZEN_ID = gql`

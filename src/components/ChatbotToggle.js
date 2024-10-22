@@ -1,7 +1,6 @@
-// src/components/ChatbotToggle.js
-
 import React, { useState } from 'react';
 import Chatbot from './Chatbot';
+import './ChatbotToggle.css'; // Add a new CSS file for toggle animation
 
 const ChatbotToggle = () => {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
@@ -11,11 +10,13 @@ const ChatbotToggle = () => {
   };
 
   return (
-    <div>
-      <button onClick={toggleChatbot}>
-        {isChatbotOpen ? 'Close Chatbot' : 'Open Chatbot'}
+    <div className="chatbot-toggle">
+      <button onClick={toggleChatbot} className="toggle-button">
+        💬 Chat with us
       </button>
-      {isChatbotOpen && <Chatbot onClose={toggleChatbot} />}
+      <div className={`chatbot-wrapper ${isChatbotOpen ? 'open' : 'closed'}`}>
+        {isChatbotOpen && <Chatbot onClose={toggleChatbot} />}
+      </div>
     </div>
   );
 };

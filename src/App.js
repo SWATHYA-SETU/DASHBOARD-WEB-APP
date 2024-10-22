@@ -66,7 +66,6 @@ function App() {
             </main>
             <Footer />
             <ChatbotToggle />
-            {/* <PromptResponder /> */}
           </div>
         </Router>
       </AuthProvider>

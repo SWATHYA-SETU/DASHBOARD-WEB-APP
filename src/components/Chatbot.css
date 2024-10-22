@@ -1,83 +1,103 @@
-/* src/components/Chatbot.css */
+/* Chatbot.css */
 
+/* Chatbox container for reference */
 .chatbot-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .chatbot-header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  
-  .chatbot-messages {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    max-height: 300px; /* Limit height */
-  }
-  
-  .message {
-    margin: 5px 0;
-    padding: 8px;
-    border-radius: 5px;
-  }
-  
-  .message.user {
-    background-color: #d1e7dd;
-    align-self: flex-end;
-  }
-  
-  .message.bot {
-    background-color: #f8d7da;
-    align-self: flex-start;
-  }
-  
-  /* Styling for the Markdown content */
-  .message.bot {
-    white-space: pre-wrap; /* Allow line breaks in Markdown */
-  }
-  
-  .chatbot-input {
-    display: flex;
-  }
-  
-  .chatbot-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .chatbot-input button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .chatbot-input button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Optional: Add some margin to the bottom of the last message */
-  .message:last-child {
-    margin-bottom: 10px;
-  }
-  
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px; /* Larger width */
+  height: 600px; /* Larger height */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.chatbot-header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.chatbot-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.chatbot-header button:hover {
+  color: red;
+}
+
+/* Message container */
+.chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+/* Generic chat bubble styles */
+.message {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for chat bubbles */
+  max-width: 70%;
+}
+
+/* User's message (blue bubble) */
+.message.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end; /* Ensure message is aligned to the right */
+  text-align: right;
+  border-radius: 12px 12px 0 12px; /* Minimal rounded corners */
+  margin-left: auto; /* Make the user bubble stay to the right of the chatbox */
+}
+
+/* Bot's message (white bubble) */
+.message.bot {
+  background-color: #f1f1f1;
+  color: black;
+  align-self: flex-start; /* Ensure message is aligned to the left */
+  text-align: left;
+  border-radius: 12px 12px 12px 0; /* Minimal rounded corners */
+}
+
+.chatbot-input {
+  display: flex;
+  padding: 10px;
+}
+
+.chatbot-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chatbot-input button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chatbot-input button:hover {
+  background-color: #0056b3;
+}
