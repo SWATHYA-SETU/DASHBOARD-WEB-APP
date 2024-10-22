@@ -64,6 +64,10 @@ function App() {
               </Routes>
             </main>
             <Footer />
+<<<<<<< Updated upstream
+=======
+            <ChatbotToggle />
+>>>>>>> Stashed changes
           </div>
         </Router>
       </AuthProvider>
