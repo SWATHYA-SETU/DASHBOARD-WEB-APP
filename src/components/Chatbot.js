@@ -10,7 +10,7 @@ const Chatbot = ({ onClose }) => {
   // Automatically send a welcome message when the chatbot is loaded
   useEffect(() => {
     const welcomeMessage = {
-      text: `**Welcome!** I'm here to assist you with disease information, symptoms, and treatment suggestions. Please ask me anything about a disease, and I'll provide a summary of common symptoms and remedies.`,
+      text: `**Welcome!** I'm here to assist you with disease information, symptoms, and treatment suggestions. Please ask me anything about a disease, and I'll provide a summary of common symptoms, precautions and disease details.`,
       sender: 'bot',
     };
     setMessages([welcomeMessage]);
