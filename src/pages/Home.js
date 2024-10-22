@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Carousel } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+
 import "../App.css";
 // import banner from "../assets/banner_1_bgrm.png";
 // import banner2 from "../assets/banner_2_bgrm.png";
@@ -31,9 +32,6 @@ import bt from "../assets/bluetick.png";
 import h2 from "../assets/h2.png";
 import ms1 from "../assets/ml1.png";
 import c1 from "../assets/c1.png";
-
-
-
 
 const data = [
   {
@@ -166,7 +164,7 @@ const Home = () => {
   return (
     <div className="w-full overflow-x-hidden">
       <div className="md:px-12 p-4 max-w-screen-2xl mx-auto mt-3">
-        <div className="gradientBg rounded-xl rounded-br-[80px] md:p-9 px-4 py-9">
+        <div className="gradientBg rounded-xl rounded-br-[80px] md:p-9 px-4 py-9 mb-10">
           <Carousel className="h-[450px] sm:h-[500px] md:h-[550px]">
             {/* First Slide */}
             <div className="flex flex-col md:flex-row justify-between items-center h-full px-4 md:px-10">
@@ -217,7 +215,7 @@ const Home = () => {
           </Carousel>
         </div>
 
-        <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+        <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-16 rounded-xl rounded-br-[80px] mb-10">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-blue-500 text-center mb-6">
               Our Services & Features
@@ -245,7 +243,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+        <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-16 rounded-xl rounded-br-[80px] mb-10">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
               <div className="w-full lg:w-[45%]">
@@ -279,7 +277,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16 rounded-xl rounded-br-[80px] mb-10">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row justify-between items-center gap-10 lg:pl-10">
               <div className="lg:w-1/2">
@@ -305,7 +303,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16 rounded-xl rounded-br-[80px]">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-blue-950 mb-4">
