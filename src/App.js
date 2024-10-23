@@ -22,6 +22,8 @@ import ChatbotToggle from './components/ChatbotToggle';
 import AddHospital from './pages/addHospital'; // Add this import
 import emailjs from '@emailjs/browser';
 import MentalBot from './pages/mentalbot';
+import Medsale from './components/Medsale'
+import Ch2 from './components/Ch2'
 
 emailjs.init("w-BPtYL_WIabHlHsv");
 
@@ -45,6 +47,9 @@ function App() {
                 <Route path="/ai-dashboard" element={<AIDashboard />} />
                 <Route path="/symptom-predictor" element={<SymptomPredictor />} />
                 <Route path="/mentalbot" element ={<MentalBot />}/>
+                <Route path="/medsale" element ={<Medsale />}/>
+                <Route path="/ch2" element ={<Ch2 />}/>
+
                 <Route
                   path="/dashboard"
                   element={

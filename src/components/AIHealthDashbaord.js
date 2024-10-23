@@ -82,6 +82,13 @@ const AIHealthDashboard = ({ healthCardData }) => {
     const handleMentalBotNavigation = () => {
     navigate('../Mentalbot'); // Navigate to mentalbot.js page
   };
+    const handleMedsaleNavigation = () => {
+    navigate('../Medsale'); // Navigate to Medsale.js page
+  };
+    const handleCh2Navigation = () => {
+    navigate('../Ch2'); // Navigate to Ch2.js page
+  };
+
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -153,6 +160,27 @@ const AIHealthDashboard = ({ healthCardData }) => {
           Mental Bot
         </button>
       </div>
+
+      {/* Medsale Button */}
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={handleMedsaleNavigation}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all"
+        >
+          Medsale
+        </button>
+      </div>
+
+      {/* Mental Bot Button */}
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={handleCh2Navigation}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all"
+        >
+          Ch2
+        </button>
+      </div>
+
 
       {/* Secondary Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
