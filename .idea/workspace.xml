@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="626e0c09-551d-42bc-9854-471a08f25c8c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Chatbot.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chatbot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ChatbotToggle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChatbotToggle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ChatbotToggle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChatbotToggle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +29,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Notification.DisplayName-DoNotAsk-Vcs Notifications": "VCS notifications",
+    "Notification.DoNotAsk-Vcs Notifications": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "SK",
@@ -60,7 +60,7 @@
       <updated>1729655732707</updated>
       <workItem from="1729655734509" duration="159000" />
       <workItem from="1729655912282" duration="452000" />
-      <workItem from="1729656374187" duration="1413000" />
+      <workItem from="1729656374187" duration="2431000" />
     </task>
     <servers />
   </component>
