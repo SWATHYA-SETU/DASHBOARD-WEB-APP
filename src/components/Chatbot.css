@@ -67,7 +67,8 @@
   text-align: right;
   border-radius: 12px 12px 0 12px;
   margin-left: auto;
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* Space after user message */
+  margin-right: 0;
   max-width: 45%; /* Make the blue bubble smaller */
 }
 
@@ -78,7 +79,11 @@
   align-self: flex-start; /* Align to the left */
   text-align: left;
   border-radius: 12px 12px 12px 0;
+<<<<<<< HEAD
   margin-top: 15px;
+=======
+  margin-top: 15px; /* Space before bot message */
+>>>>>>> origin/ACEAPP
 }
 
 /* Chat input */
