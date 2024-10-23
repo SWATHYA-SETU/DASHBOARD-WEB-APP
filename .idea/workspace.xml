@@ -47,7 +47,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13763.11" />
+        <option value="bundled-python-sdk-c69650fc56ca-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.15619.17" />
       </set>
     </attachedChunks>
   </component>
@@ -63,6 +63,8 @@
       <workItem from="1729655912282" duration="452000" />
       <workItem from="1729656374187" duration="2431000" />
       <workItem from="1729659332232" duration="444000" />
+      <workItem from="1729659830794" duration="186000" />
+      <workItem from="1729660222727" duration="172000" />
     </task>
     <servers />
   </component>
