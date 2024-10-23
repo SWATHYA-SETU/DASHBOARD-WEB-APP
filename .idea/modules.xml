@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DASHBOARD-WEB-APP.iml" filepath="$PROJECT_DIR$/.idea/DASHBOARD-WEB-APP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../m_health_bot/.idea/m_health_bot.iml" filepath="$PROJECT_DIR$/../m_health_bot/.idea/m_health_bot.iml" />
     </modules>
   </component>
 </project>
