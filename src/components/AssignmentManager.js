@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
-import { PencilIcon, TrashIcon, UserIcon, CalendarIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, PencilIcon, TrashIcon, UserIcon, CalendarIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
 const GET_ASSIGNMENTS = gql`
   query GetAssignments {
