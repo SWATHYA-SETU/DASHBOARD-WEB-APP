@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Carousel } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
+
 import "../App.css";
 // import banner from "../assets/banner_1_bgrm.png";
 // import banner2 from "../assets/banner_2_bgrm.png";
@@ -114,6 +116,8 @@ const packages = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const settings = {
     dots: false,
     infinite: true,
@@ -174,7 +178,7 @@ const Home = () => {
                   information, medication reminders, and outbreak
                   predictions—all at your fingertips.
                 </p>
-                <button className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
+                <button onClick = {() => navigate('/login')} className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
                   Get Started
                 </button>
               </div>
@@ -197,7 +201,7 @@ const Home = () => {
                   epidemics, weather conditions, and disease outbreaks. We help
                   you keep your family safe.
                 </p>
-                <button className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
+                <button onClick={() => navigate('/about')} className="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
                   Learn More
                 </button>
               </div>
@@ -298,8 +302,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16 rounded-xl rounded-br-[80px] mb-10">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16 rounded-xl rounded-br-[80px]">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-blue-950 mb-4">

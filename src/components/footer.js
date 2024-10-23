@@ -40,8 +40,9 @@ const Footer = () => {
                 name="email"
                 id="swasthya-footer-email"
                 placeholder="Your email"
-                className="swasthya-footer-input bg-[#ffffff] py-2 px-7 rounded-md focus:outline-none w-full md:w-auto text-black"
-                style={{ width: "280px", marginLeft: "11px", zIndex: 10 }}
+                className="swasthya-footer-input bg-white py-2 px-7 rounded-md focus:outline-none w-full md:w-auto text-black"
+                style={{ width: "280px", marginLeft: "25px", zIndex: 10 }}
+
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
